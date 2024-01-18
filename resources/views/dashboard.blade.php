@@ -29,10 +29,10 @@
                     @foreach ($links as $link)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ url($link->original_url) }}
+                                <a href="{{ $link->original_url }}">{{ $link->original_url }}</a>
                             </th>
                             <td class="px-6 py-4">
-                                {{ $link->short_url }}
+                                {{ url('') . '/' . $link->short_url }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $link->getStatsCount() }}

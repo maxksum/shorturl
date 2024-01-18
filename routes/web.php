@@ -29,6 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/new', [MainController::class, 'create'])->name('forms.new');
-Route::post('/new', [MainController::class, 'createShortLink'])->name('forms.create');
+Route::get('/new', [MainController::class, 'create'])->middleware(['auth'])->name('forms.new');
+Route::post('/new', [MainController::class, 'createShortLink'])->middleware(['auth'])->name('forms.create');
 Route::get('/{shortUrl}', [MainController::class, 'redirectToOriginalUrl'])->name('redirect');

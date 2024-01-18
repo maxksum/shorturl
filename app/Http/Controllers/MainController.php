@@ -6,6 +6,7 @@ use App\Models\Link;
 use App\Models\LinkStat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class MainController extends Controller
@@ -28,7 +29,12 @@ class MainController extends Controller
         try {
             $request->validate([
                 'original_url' => 'required|url',
-                'short_url' => 'required|alpha_dash|unique:links,short_url',
+                'short_url' => [
+                    'required',
+                    'alpha_dash',
+                    'unique:links,short_url',
+                    Rule::notIn($this->getReservedShortUrls()),
+                ],
                 'comment' => 'nullable|string',
             ]);
         } catch (ValidationException $e) {
@@ -60,5 +66,10 @@ class MainController extends Controller
         ]);
 
         return redirect()->away($link->original_url);
+    }
+
+    protected function getReservedShortUrls()
+    {
+        return config('reserved', []);
     }
 }
