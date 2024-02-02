@@ -23,6 +23,9 @@
                         <th scope="col" class="px-6 py-3">
                             Unique users
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Comment
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,6 +42,9 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{ $link->getUniqueStatsCount() }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $link->comment }}
                             </td>
                         </tr>
                     @endforeach
